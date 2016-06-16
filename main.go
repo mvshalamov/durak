@@ -23,6 +23,27 @@ type Player struct {
     Cards []Card
 }
 
+func (p *Player) Auto_step(card Card, trump string) {
+    for index, element := range p.Cards {
+      if element.Lear != card.Lear {
+        if element.Lear == trump {
+            fmt.Println("Козырь. Бъет")
+          } else {
+            fmt.Println("Не бъет")
+          }
+        } else {
+          if card.Data.Weight < element.Data.Weight {
+            fmt.Println("Бъет")
+          } else {
+            fmt.Println("Не бъет")
+          }
+      }
+
+      fmt.Println(element)
+      fmt.Println(index)
+    }
+}
+
 
 type Game struct {
     Players []Player
@@ -93,4 +114,9 @@ func main() {
     fmt.Println(len(game.CD.Cards))
     game.pass_card()
     fmt.Println(len(game.CD.Cards))
+    p1 := game.Players[0]
+    fmt.Println("===")
+    fmt.Println(game.Trump)
+    p1.Auto_step(Card{"T", Pair{"10", 10}}, game.Trump.Lear)
+
 }
